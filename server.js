@@ -22,13 +22,15 @@ app.use(express.json());
 //   3. Generate a password for "Mail" and paste it into .env as EMAIL_PASS.
 // -----------------------------------------------------------
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER, // sandilenkosi267@gmail.com
-    pass: process.env.EMAIL_PASS  // 16-character Gmail App Password
-  }
-});
-
+     host: "smtp.gmail.com",
+     port: 587,
+     secure: false,
+     auth: {
+       user: process.env.EMAIL_USER,
+       pass: process.env.EMAIL_PASS
+     },
+     connectionTimeout: 15000
+   });
 // Basic sanity check on boot
 transporter.verify((err) => {
   if (err) {
